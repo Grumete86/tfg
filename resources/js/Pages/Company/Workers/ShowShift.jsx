@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Layout from "@/Layouts/Layout";
-import { useForm, usePage } from "@inertiajs/react";
+import { useForm, usePage, Head } from "@inertiajs/react";
 import IndexRow from "./partials/IndexRow";
 import WorkerRow from "./partials/WorkerRow";
 import InfoLayout from "@/Components/pages/Info";
@@ -82,219 +82,140 @@ export default function ShowShift() {
     }
 
     return (
-        <Layout
-            user={auth.user}
-            header={
-                <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                    <a href={route('company.workers.index')} className="hover:text-slate-500">
-                        Trabajadores
-                    </a>
-                    <a href={route('company.workers.show', { worker: actualWorker })} className="hover:text-slate-500">
-                        {' > '}
-                        {actualWorker.name}
-                    </a>
-                    <span className="text-slate-500">
-                        {' > '}
-                        {shiftInfo.start_time.toLocaleString('es-ES', {
-                            weekday: "long",
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric"
-                        })}
-                    </span>
-                </h2>}
-        >
-            <WorkersShowLayout>
-                <WorkerShowElement worker={actualWorker} updateFunction={updateFunction} />
-                <InfoLayout>
-                    <>
-                        <div className="bg-white text-slate-700 rounded-lg p-2 w-full ">
-                            <form className="w-full" onSubmit={handleSubmit}>
-                                <div className="flex flex-row items-center gap-6 content-stretch">
+        <>
 
-                                    <div className="grid grid-rows-3 justify-center w-20 mx-1 p-2 bg-slate-200 rounded-lg text-slate-700">
-                                        <p className="text-xs text-center">
-                                            {shiftInfo.start_time.toLocaleDateString('es-ES', { weekday: 'short' })}
-                                        </p>
-                                        <div className="row-span-2 text-2xl font-bold place-content-center text-center">
-                                            {shiftInfo.start_time.toLocaleDateString('es-ES', { day: 'numeric' })}
+            <Head title={`Turno de ${shiftInfo.start_time.toLocaleString('es-ES', {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+            })
+                }`} />
+            <Layout
+                user={auth.user}
+                header={
+                    <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                        <a href={route('company.workers.index')} className="hover:text-slate-500">
+                            Trabajadores
+                        </a>
+                        <a href={route('company.workers.show', { worker: actualWorker })} className="hover:text-slate-500">
+                            {' > '}
+                            {actualWorker.name}
+                        </a>
+                        <span className="text-slate-500">
+                            {' > '}
+                            {shiftInfo.start_time.toLocaleString('es-ES', {
+                                weekday: "long",
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric"
+                            })}
+                        </span>
+                    </h2>}
+            >
+                <WorkersShowLayout>
+                    <WorkerShowElement worker={actualWorker} updateFunction={updateFunction} />
+                    <InfoLayout>
+                        <>
+                            <div className="bg-white text-slate-700 rounded-lg p-2 w-full ">
+                                <form className="w-full" onSubmit={handleSubmit}>
+                                    <div className="flex flex-row items-center gap-6 content-stretch">
+
+                                        <div className="grid grid-rows-3 justify-center w-20 mx-1 p-2 bg-slate-200 rounded-lg text-slate-700">
+                                            <p className="text-xs text-center">
+                                                {shiftInfo.start_time.toLocaleDateString('es-ES', { weekday: 'short' })}
+                                            </p>
+                                            <div className="row-span-2 text-2xl font-bold place-content-center text-center">
+                                                {shiftInfo.start_time.toLocaleDateString('es-ES', { day: 'numeric' })}
+                                            </div>
+                                            <p className="text-xs text-center">
+                                                {shiftInfo.start_time.toLocaleDateString('es-ES', { month: 'short', year: 'numeric' })}
+                                            </p>
                                         </div>
-                                        <p className="text-xs text-center">
-                                            {shiftInfo.start_time.toLocaleDateString('es-ES', { month: 'short', year: 'numeric' })}
-                                        </p>
+
+                                        <div className="flex-1">
+                                            <div className=" text-lg font-semibold" >
+                                                <span data-tooltip-id="duracion"
+                                                    data-tooltip-content="duración">
+                                                    {`${shiftInfo.duration.hoursString}h ${shiftInfo.duration.minutesString}m`}
+                                                </span>
+                                            </div>
+                                            <Tooltip id="duracion" />
+                                            <hr className="max-w-3/5" />
+                                            <div className="flex justify-start flex-wrap items-start sm:items-center gap-2 text-slate-400 pt-2">
+
+                                                <div className="relative">
+                                                    <div className="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+                                                        <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                                            <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clipRule="evenodd" />
+                                                        </svg>
+                                                    </div>
+                                                    <input
+                                                        type="time"
+                                                        id="start_time"
+                                                        className="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                        value={shiftInfo.start_time_HHMM}
+                                                        onChange={handleChange}
+                                                        required
+                                                        data-tooltip-id="comienzo"
+                                                        data-tooltip-content="Comienzo turno"
+                                                    />
+                                                    <Tooltip id="comienzo" />
+                                                </div>
+
+                                                <div className="relative">
+                                                    <div className="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
+                                                        <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                                            <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clipRule="evenodd" />
+                                                        </svg>
+                                                    </div>
+
+                                                    <input
+                                                        type="time"
+                                                        id="end_time"
+                                                        className="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                        value={shiftInfo.end_time_HHMM}
+                                                        onChange={handleChange}
+
+                                                        data-tooltip-id="final"
+                                                        data-tooltip-content="Final turno"
+                                                    />
+                                                    <Tooltip id="final" />
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div className="flex flex-col gap-2 text-lg">
+
+                                            <button
+                                                onClick={handleDelete}
+                                                className="bg-red-600 text-white rounded-lg p-3 hover:bg-red-500 hover:text-red-900"
+                                                data-tooltip-id="delete"
+                                                data-tooltip-content="borrar"
+                                            >
+                                                <HiXCircle />
+                                            </button>
+                                            <button
+                                                type="submit"
+                                                className="bg-green-600 text-white rounded-lg p-3 hover:bg-green-500 hover:text-green-900"
+                                                data-tooltip-id="save"
+                                                data-tooltip-content="guardar"
+                                            >
+                                                <HiDocumentCheck />
+                                            </button>
+                                            <Tooltip id="delete" />
+                                            <Tooltip id="save" />
+
+                                        </div>
                                     </div>
-
-                                    <div className="flex-1">
-                                        <div className=" text-lg font-semibold" >
-                                            <span data-tooltip-id="duracion"
-                                                data-tooltip-content="duración">
-                                                {`${shiftInfo.duration.hoursString}h ${shiftInfo.duration.minutesString}m`}
-                                            </span>
-                                        </div>
-                                        <Tooltip id="duracion" />
-                                        <hr className="max-w-3/5" />
-                                        <div className="flex justify-start flex-wrap items-start sm:items-center gap-2 text-slate-400 pt-2">
-                                            {/* <div>
-                                                <label htmlFor="start-time" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Start time:</label> */}
-                                            <div className="relative">
-                                                <div className="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
-                                                    <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clipRule="evenodd" />
-                                                    </svg>
-                                                </div>
-                                                <input
-                                                    type="time"
-                                                    id="start_time"
-                                                    className="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                    value={shiftInfo.start_time_HHMM}
-                                                    onChange={handleChange}
-                                                    required
-                                                    data-tooltip-id="comienzo"
-                                                    data-tooltip-content="Comienzo turno"
-                                                />
-                                                <Tooltip id="comienzo" />
-                                            </div>
-                                            {/* </div>
-                                            <div> */}
-                                            {/* <label htmlFor="end-time" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">End time:</label> */}
-                                            <div className="relative">
-                                                <div className="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
-                                                    <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clipRule="evenodd" />
-                                                    </svg>
-                                                </div>
-                                                {/* {console.log(actualShift, shiftInfo)} */}
-                                                <input
-                                                    type="time"
-                                                    id="end_time"
-                                                    className="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                    value={shiftInfo.end_time_HHMM}
-                                                    onChange={handleChange}
-
-                                                    data-tooltip-id="final"
-                                                    data-tooltip-content="Final turno"
-                                                />
-                                                <Tooltip id="final" />
-                                            </div>
-                                            {/* </div> */}
-
-
-                                            {/* <HiClock />
-                                        <span>
-                                        {shiftInfo.start_time.toLocaleTimeString('es-ES', { hour: "2-digit", minute: "2-digit" })}
-                                        {' - '}
-                                        {shiftInfo.end_time ? shiftInfo.end_time.toLocaleTimeString('es-ES', { hour: "2-digit", minute: "2-digit" }) : <span className='text-green-600 text-sm'>en curso</span>}
-                                    </span> */}
-                                        </div>
-                                    </div>
-                                    {/* <div>
-                                    <HiArrowRight />
-                                </div> */}
-                                    <div className="flex flex-col gap-2 text-lg">
-
-                                        <button
-                                            onClick={handleDelete}
-                                            className="bg-red-600 text-white rounded-lg p-3 hover:bg-red-500 hover:text-red-900"
-                                            data-tooltip-id="delete"
-                                            data-tooltip-content="borrar"
-                                        >
-                                            <HiXCircle />
-                                        </button>
-                                        <button
-                                            type="submit"
-                                            className="bg-green-600 text-white rounded-lg p-3 hover:bg-green-500 hover:text-green-900"
-                                            data-tooltip-id="save"
-                                            data-tooltip-content="guardar"
-                                        >
-                                            <HiDocumentCheck />
-                                        </button>
-                                        <Tooltip id="delete" />
-                                        <Tooltip id="save" />
-
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-
-
-
-
-                        {/* <div key={actualShift.id} className="bg-white text-slate-700 rounded-lg p-2 w-full">
-                            <div className="flex flex-col items-center gap-6">
-                                <div className="bg-slate-200 p-2 px-4 rounded-lg text-sm font-bold">
-                                    {shiftInfo.start_time.toLocaleString('es-ES', {
-                                        weekday: "long",
-                                        year: "numeric",
-                                        month: "long",
-                                        day: "numeric"
-                                    })}
-                                </div>
-                                <div className={`p-2 px-4 bg-slate-200 rounded-lg text-center ${actualShift.end_time ? 'bg-slate-200' : 'bg-green-100'}`}>
-                                    <div className={`text-xs font-bold ${actualShift.end_time ? 'text-slate-800' : 'text-green-800'}`}>{actualShift.end_time ? 'DURACION' : 'en curso'}</div>
-                                    <div>{`${shiftInfo.duration.hoursString}h ${shiftInfo.duration.minutesString}m`}</div>
-                                </div>
-                                <div>
-                                    <form className="w-full mx-auto grid grid-cols-2 gap-4" onSubmit={handleSubmit}>
-                                        <div>
-                                            <label htmlFor="start-time" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Start time:</label>
-                                            <div className="relative">
-                                                <div className="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
-                                                    <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clipRule="evenodd" />
-                                                    </svg>
-                                                </div>
-                                                <input
-                                                    type="time"
-                                                    id="start_time"
-                                                    className="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                    value={shiftInfo.start_time_HHMM}
-                                                    onChange={handleChange}
-                                                    required
-                                                />
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <label htmlFor="end-time" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">End time:</label>
-                                            <div className="relative">
-                                                <div className="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
-                                                    <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                                        <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z" clipRule="evenodd" />
-                                                    </svg>
-                                                </div>
-                                                {console.log(actualShift, shiftInfo)}
-                                                <input
-                                                    type="time"
-                                                    id="end_time"
-                                                    className="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                    value={shiftInfo.end_time_HHMM}
-                                                    onChange={handleChange}
-                                                    required
-                                                />
-                                            </div>
-                                        </div>
-                                        <button onClick={handleCancel} className="bg-red-600 text-white rounded-lg px-4 p-2">
-                                            CANCEL
-                                        </button>
-                                        <button type="submit" className="bg-green-600 text-white rounded-lg px-4 p-2">
-                                            GUARDAR
-                                        </button>
-
-                                    </form>
-
-                                </div>
-
-
+                                </form>
                             </div>
-                        </div> */}
-
-
-                    </>
-
-
-                </InfoLayout >
-            </WorkersShowLayout >
-
-        </Layout >
+                        </>
+                    </InfoLayout >
+                </WorkersShowLayout >
+            </Layout >
+        </>
     )
 }
 

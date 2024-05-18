@@ -1,5 +1,5 @@
 import Layout from "@/Layouts/Layout";
-import { usePage } from "@inertiajs/react"
+import { usePage, Head } from "@inertiajs/react"
 import useWorkerWithShifts from "@/hooks/useWorkerWithShifts";
 import Status from "../Company/Workers/partials/Status";
 import ShiftCard from "@/Components/shiftComponents/ShiftCard";
@@ -14,6 +14,7 @@ export default function Index() {
 
     return (
         <WorkerProvider workerWithShifts={worker} routePrefix='worker' statusChangeAvailable={true}>
+            <Head title={`Tus turnos - ${worker.name}`} />
             <Layout
                 user={auth.user}
                 header={

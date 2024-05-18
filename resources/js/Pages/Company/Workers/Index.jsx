@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { usePage } from "@inertiajs/react";
+import { usePage, Head } from "@inertiajs/react";
 import Layout from "@/Layouts/Layout";
 import WorkersIndexLayout from "./layout/WorkersIndexLayout";
 import IndexRow from "./partials/IndexRow";
@@ -14,14 +14,17 @@ export default function Index() {
         setWorkersList(updatedWorkers.props.workers);
     }
     return (
-        <Layout
-            user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Trabajadores</h2>}
-        >
-            <WorkersIndexLayout>
-                {workersList.map(worker => <WorkerCardIndex key={worker.id} worker={worker} updateFunction={updateFunction} />)}
-            </WorkersIndexLayout >
-        </Layout>
+        <>
+            <Head title={`Tus trabajadores`} />
+            <Layout
+                user={auth.user}
+                header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Trabajadores</h2>}
+            >
+                <WorkersIndexLayout>
+                    {workersList.map(worker => <WorkerCardIndex key={worker.id} worker={worker} updateFunction={updateFunction} />)}
+                </WorkersIndexLayout >
+            </Layout>
+        </>
     )
 }
 

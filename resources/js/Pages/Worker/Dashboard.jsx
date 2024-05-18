@@ -1,6 +1,6 @@
 import Layout from "@/Layouts/Layout";
 import ShowLayout from "@/Components/pages/Show";
-import { usePage } from "@inertiajs/react"
+import { usePage, Head } from "@inertiajs/react"
 import useWorkerWithShifts from "@/hooks/useWorkerWithShifts";
 import { WorkerProvider } from "@/Context/WorkerContext";
 import useShift from "@/hooks/useShift";
@@ -37,6 +37,7 @@ export default function Dashboard() {
                 header={
                     <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Dashboard</h2>
                 }>
+                <Head title={actualWorker.name} />
                 <ShowLayout>
                     <div className="w-full min-h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-6">
                         <div className="bg-white rounded-lg p-6 col-span-1 sm:col-span-2 lg:col-span-2 xl:col-span-3 text-2xl ">

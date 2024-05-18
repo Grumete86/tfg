@@ -1,6 +1,6 @@
 import Layout from "@/Layouts/Layout";
 import useShift from "@/hooks/useShift";
-import { usePage } from "@inertiajs/react"
+import { usePage, Head } from "@inertiajs/react"
 import WorkersShowLayout from "../Company/Workers/layout/WorkersShowLayout";
 import WorkerShowElement from "../Company/Workers/partials/WorkerShowElement";
 import InfoLayout from "@/Components/pages/Info";
@@ -15,6 +15,7 @@ export default function Show() {
     const { actualShift, actualWorker, shiftInfo, handleChange, handleSave, handleDelete } = useShift({ workerWithShifts: worker, shift: shift, routePrefix: 'worker', editAvailable: true });
     return (
         <WorkerProvider workerWithShifts={worker} routePrefix='worker' statusChangeAvailable={true} >
+            <Head title={(new Date(actualShift.start_time)).toLocaleString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })} />
             <Layout
                 user={auth.user}
                 header={<div className="flex font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">

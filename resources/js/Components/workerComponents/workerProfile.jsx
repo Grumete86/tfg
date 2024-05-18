@@ -16,7 +16,6 @@ export default function WorkerProfile({ worker, routePrefix, updateFunction }) {
     } = useWorker();
     return (
         <div className="w-full sm:w-4/5 bg-white transition-all shadow-lg rounded-lg dark:bg-gray-800 ">
-
             <div className="flex flex-col items-center justify-center p-4 mt-2">
                 <img
                     alt="profil"

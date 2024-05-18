@@ -8,8 +8,8 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 
 
-Route::get('/', [WelcomeController::class, 'welcome']);
-
+Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome');
+Route::get('/seller', [WelcomeController::class, 'seller'])->name('seller');
 // function () {
     
 //     return Inertia::render('Welcome', [
