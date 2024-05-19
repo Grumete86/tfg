@@ -55,4 +55,8 @@ class ShiftController extends Controller
         $shift = Shift::find($request->id);
         $shift->update($request->all());
     }
+    public function destroy(Shift $shift)
+    {
+        $shift->delete();
+    }
 }
