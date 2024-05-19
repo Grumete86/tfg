@@ -20,7 +20,7 @@ export default function EditModal({ className = '', worker, companies, updateWor
         confirmEdition } = useEditForm({
             title: 'Edit Worker',
             formObject: worker,
-            updateRoute: 'workers.update',
+            updateRoute: 'admin.workers.update',
             updateFunction: updateWorker
         });
     console.log(data);

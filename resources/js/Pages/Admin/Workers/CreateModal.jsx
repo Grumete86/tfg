@@ -25,7 +25,7 @@ export default function CreateModal({ className = '', updateWorker, companies })
                 password_confirmation: '',
                 contracted_by: '',
             },
-            creationRoute: 'workers.store',
+            creationRoute: 'admin.workers.store',
             updateFunction: updateWorker
         });
 

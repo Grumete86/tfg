@@ -15,7 +15,7 @@ export default function DeleteModal({ className = '', worker, updateWorker }) {
     } = useDeleteForm({
         updateFunction: updateWorker,
         formObject: worker,
-        deletionRoute: 'workers.destroy'
+        deletionRoute: 'admin.workers.destroy'
     });
 
     return (
