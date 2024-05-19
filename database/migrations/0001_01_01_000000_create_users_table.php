@@ -24,8 +24,8 @@ return new class extends Migration
             $table->boolean('is_worker')->default(false);
             $table->unsignedBigInteger('contracted_by')->nullable()->default(null);
             $table->string('dni')->nullable()->default(null);
-            $table->foreign('contracted_by')
-      ->constrained(table: 'companies', indexName: 'user_id')
+            $table->foreign('contracted_by', 'users_contracted_by_foreign')
+            ->references('id')->on('companies')
       ->onUpdate('cascade')
       ->onDelete('cascade');
         

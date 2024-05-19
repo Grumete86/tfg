@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('city');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
-            $table->foreign('user_id')
-      ->constrained(table: 'users', indexName: 'id')
+            $table->foreign('user_id', 'manager_by_foreign')
+            ->references('id')->on('users')
       ->onUpdate('cascade')
       ->onDelete('cascade');
         

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->dateTime('start_time', precision: 0)->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTime('end_time', precision: 0)->nullable()->default(null);
             $table->timestamps();
-            $table->foreign('user_id')
-      ->constrained(table: 'users', indexName: 'id')
+            $table->foreign('user_id', 'users_shifts_by_foreign')
+            ->references('id')->on('users')
       ->onUpdate('cascade')
       ->onDelete('cascade');
         });
