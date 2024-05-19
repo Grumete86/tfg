@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('shifts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInt('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->dateTime('start_time', precision: 0)->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTime('end_time', precision: 0)->nullable()->default(null);
             $table->timestamps();

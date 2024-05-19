@@ -22,7 +22,7 @@ return new class extends Migration
             $table->boolean('is_admin')->default(false);
             $table->boolean('is_company')->default(false);
             $table->boolean('is_worker')->default(false);
-            $table->unsignedBigInt('contracted_by')->nullable()->default(null);
+            $table->unsignedBigInteger('contracted_by')->nullable()->default(null);
             $table->string('dni')->nullable()->default(null);
             $table->foreignId('contracted_by')
       ->constrained(table: 'companies', indexName: 'user_id')

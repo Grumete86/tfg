@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('address');
             $table->string('city');
-            $table->unsignedBigInt('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
             $table->foreignId('user_id')
       ->constrained(table: 'users', indexName: 'id')
