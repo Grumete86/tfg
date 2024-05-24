@@ -1,9 +1,9 @@
-<p align="center" font-size="24pt"><a href="https://turnify.elprofeonline.es" target="_blank">Turnify</p>
+<p align="center"><a href="https://turnify.elprofeonline.es" target="_blank"  style="font-size:36pt;font-weight:bold;color:indigo;font-family:system-ui">Turnify</a></p>
 
-</hr>
+
+
 
 ## Turnify
-
 Aplicación web - Proyecto Web de Bruno Prádanos Herce
 
 - Gestor de turnos de ETT
@@ -15,22 +15,18 @@ El proyecto se centra en desarrollar un Producto Mínimo Viable (MVP) para una e
 ### ¿Que vas a ver?
 La aplicación web, tiene un punto de entrada común para los distintos tipos de usuario.
 ### Administrador
-Interfaz web para administradores
-#### Credenciales:
-- **Usuario:** fpd@email.com
-- **Contraseña:**  0123456789
+- **Credenciales:**
+    - **Usuario:** fpd@email.com
+    - **Contraseña:**  0123456789
 
 
 ### Empresa
-Interfaz web para managers
-#### Credenciales:
-- **Usuario:** rolando@email.com
-- **Contraseña:**  0123456789
+- **Credenciales:**
+    - **Usuario:** rolando@email.com
+    - **Contraseña:**  0123456789
 
 
 ### Trabajador
-Interfaz web para trabajadores
-#### Credenciales:
-- **Usuario:** martinez@email.com
-- **Contraseña:**  0123456789
-
+- **Credenciales:**
+    - **Usuario:** martinez@email.com
+    - **Contraseña:**  0123456789
